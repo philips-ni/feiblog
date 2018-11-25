@@ -82,3 +82,10 @@ deploy:
   type: git
   repo: https://github.com/philips-ni/philips-ni.github.io.git
   branch: master
+
+theme_config:
+  menu:
+    Home: /
+    Archives: /archives
+    github: https://github.com/philips-ni
+  rss: false
