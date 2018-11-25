@@ -39,8 +39,8 @@ In ~/.emacs add following:
 Run:
 
 #+BEGIN_SRC bash -n
-hexo init blog
-cd blog
+hexo init myblog
+cd myblog
 npm install
 # only need run this once
 npm install https://github.com/coldnew/hexo-renderer-org#master --save
