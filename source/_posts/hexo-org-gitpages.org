@@ -1,0 +1,103 @@
+#+TITLE: Hexo ,org mode and github pages
+#+LAYOUT: post
+#+CATEGORIES: org-mode
+#+TAGS: hexo, org-mode
+#+OPTIONS: toc:2
+#+OPTIONS: ^:nil
+
+#+HTML: <!-- more -->
+* My environment
+
+ - macOS high Seirra(10.13.6) 
+ - Emacs 26.1
+
+* Installation
+ - [[https://brew.sh/][brew]]
+   - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ - git 
+   - brew install git
+ - npm 
+   - brew install npm
+ - [[https://hexo.io/][hexo]] 
+   - npm install hexo-cli -g
+ - [[https://github.com/hexojs/hexo-deployer-git][hexo-deployer-git]]
+   - npm install hexo-deployer-git --save
+ - [[https://github.com/kuanyui/hexo.el][hexo.el]]
+
+
+* Initialize blog directory
+
+In ~/.emacs add following:
+#+BEGIN_SRC lisp -n
+(defun hexo-my-blog ()
+    (interactive)
+    ;; change to your blog directory
+    (hexo "~/blog/myblog/"))
+#+END_SRC
+
+
+Run:
+
+#+BEGIN_SRC bash -n
+hexo init blog
+cd blog
+npm install
+# only need run this once
+npm install https://github.com/coldnew/hexo-renderer-org#master --save
+#+END_SRC
+
+* Create a new post
+
+#+BEGIN_SRC bash
+M-x hexo-new
+#+END_SRC
+
+* Deploy
+** create a git repository 
+  - <username>.github.io 
+
+This repository name is also your blog url.
+
+** Update "<blog_dir>/_config.yml"
+#+BEGIN_SRC yaml
+# Site
+title: Fei's Blog
+subtitle:
+description:
+keywords:
+author: Fei Ni
+language:
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://philips-ni.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+...
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  # change to your github pages repo
+  repo: https://github.com/philips-ni/philips-ni.github.io.git
+  branch: master
+
+#+END_SRC
+
+
+** Deploy to local HTTP server
+
+#+BEGIN_SRC bash
+# blog server is running in http://localhost:4000
+hexo server
+#+END_SRC
+
+
+** Deploy to github pages
+#+BEGIN_SRC bash
+# all generated static files will be deoployed to your github pages space
+hexo deploy
+#+END_SRC
