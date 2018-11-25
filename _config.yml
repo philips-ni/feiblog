@@ -87,4 +87,6 @@ theme_config:
   menu:
     Home: /
     Archives: /archives
+    About: /about
     github: https://github.com/philips-ni
+    
